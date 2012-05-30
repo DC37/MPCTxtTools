@@ -1,0 +1,53 @@
+Implement:
+-Split multiple times
+-Tempo gap detection on/off
+-File split with option to go 96 measures at a time
+-Drop-down menu select file interface
+-Rename files
+-Copy-paste pieces
+-Copy-paste over notes
+
+1.06
+-GUI changed to java.awt
+-Revamp of UI to make it more intuitive
+
+1.05a
+-File Splitter bugfix
+-Prefs Folder backup now shows a dialog after it's done
+
+1.05
+-Prefs folder backup
+-Hashtable fix #3
+-Instrument Replacer re-structured, less error-prone.
+-Database of useful functions, TextEditing, implemented.
+
+1.04d
+-Hashtable fix #2. I need to stop making typos when programming. It's extremely hard to catch those.
+
+1.04c
+-Fixed hashtable; the Star is not the Gameboy anymore, etc. For some reason, the letter order was out of whack
+
+1.04b
+-More aesthetic edits.
+
+1.04a
+-Aesthetic updates
+-"Cancel" buttons don't generate errors now.
+
+1.04
+-UI now includes error messages so you know when the program actually experiences an error.
+
+1.03
+-UI updated again to include help options for the File Splitter and Instrument Replacer.
+-Improved file splitting capabilities; glitch that created huge numbers of files fixed.
+-The menu window is persistent now, until you click exit.
+
+1.02
+-UI Updated to include a help option
+-Better error handling
+
+1.01
+-File Splitter added; UI updated to include options for File Splitter and Instrument Replacer functions.
+
+1.00a
+-Instrument replacer updated to include a "delete" option.
