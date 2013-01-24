@@ -182,7 +182,7 @@ public class MPCTxtToolsMain
 
     /**
      * 
-     * @return
+     * @return Some file that the user chooses.
      * @throws Cancel
      * @throws IOException
      */
