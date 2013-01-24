@@ -7,18 +7,28 @@ import static utilities.TextUtil.*;
 
 
 /**
+ * This is the class that takes care of replacing instruments in
+ * an MPC Text file.
  * @author RehdBlob
- * @version 1.06
  * @since 1.00
  * @since 2011.0802
  */
 
 public class InstrumentReplacer {
 
+    /** */
     private String text  = "";
+
+    /** */
     private String start = "";
+
+    /** */
     private String end   = "";
+
+    /** */
     private ArrayList<String> pieces = new ArrayList<String>();
+
+    /** */
     private File file  = null;
 
     /**
