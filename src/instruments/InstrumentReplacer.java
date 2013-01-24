@@ -40,7 +40,6 @@ public class InstrumentReplacer {
      * @param fileName The name of the file that was opened.
      */
     public void setParams(String read, File fileName) {
-
         text   = clean(read);
         start  = getStart(read);
         end    = getEnd(read);
