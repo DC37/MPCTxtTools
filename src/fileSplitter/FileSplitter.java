@@ -124,9 +124,10 @@ public class FileSplitter
 		PrintStream writer = new PrintStream(
 			file.substring(0,file.indexOf(']'))
 			+ "]MarioPaint.txt");
-		if(text.size()==0)
+		if(text.size()==0) {
+			writer.close();
 			throw new NoOutputException();
-		
+		}
 		writer.print(start);
 		for (int i = 0; i < floor (384 / multiplier) ; i++) {
 			writer.print(text.remove(0));
