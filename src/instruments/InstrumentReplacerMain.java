@@ -1,4 +1,5 @@
 package instruments;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import errorChecking.ErrorDialogs;
 
@@ -50,12 +51,11 @@ public class InstrumentReplacerMain {
                         "heart, piranha, coin, shyguy, boo):",
                         "Instrument Replacer", JOptionPane.QUESTION_MESSAGE,
                         null, null,	"Mario");
-        if (change==null)
+        if (change == null)
             return;
 
         Character ch = instruments.get(change.toLowerCase());
-        if (ch==null)
-        {
+        if (ch == null) {
             ErrorDialogs.illegalCharacter();
             return;
         }
@@ -67,48 +67,38 @@ public class InstrumentReplacerMain {
                         "heart, piranha, coin, shyguy, boo,\n" +
                         "delete):", "Instrument Replacer",
                         JOptionPane.QUESTION_MESSAGE, null, null, "Mushroom");
-        if (changeTo==null)
+        if (changeTo == null)
             return;
 
         Character chT = instruments.get(changeTo.toLowerCase());
-        if (chT==null)
-        {
+        if (chT == null) {
             ErrorDialogs.illegalCharacter();
             return;
         }
 
-        try
-        {
+        try {
             replace.writeOldFile();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             ErrorDialogs.unwritableFile();
             e.printStackTrace();
             return;
         }
         String newFile = replace.change(ch, chT);
 
-        try
-        {
+        try {
             PrintStream writer = new PrintStream(fileName);
             writer.print(newFile);
             writer.close();
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             ErrorDialogs.fileNotFound();
             e.printStackTrace();
             return;
-        }
-        catch (SecurityException e)
-        {
+        } catch (SecurityException e) {
             ErrorDialogs.unwritableFile();
             e.printStackTrace();
             return;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             ErrorDialogs.unanticipatedError();
             e.printStackTrace();
             return;
@@ -118,11 +108,11 @@ public class InstrumentReplacerMain {
     }
 
     /**
+     * This populates the hashtable we're using to get characters.
      * @since 1.00b
      * @since 2011.0802
      */
-    private static void putInstruments()
-    {
+    private static void putInstruments() {
         String [] res = ("mario mushroom yoshi " +
                 "star flower gameboy dog cat " +
                 "pig swan face plane boat car " +
