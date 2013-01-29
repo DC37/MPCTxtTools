@@ -73,7 +73,7 @@ public class InstrumentReplacer {
                         if (delete)
                             out += "+";
                         else
-                            out+=changeTo + t.substring(1);
+                            out += changeTo + t.substring(1);
                     } else {
                         out+= t;
                     }

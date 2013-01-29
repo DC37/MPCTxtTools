@@ -44,13 +44,19 @@ public class InstrumentReplacerMain {
             return;
         }
 
+        String [] res = ("mario mushroom yoshi " +
+                "star flower gameboy dog cat " +
+                "pig swan face plane boat car " +
+                "heart piranha coin shyguy boo").split("\\s");
+
         String change = (String) JOptionPane.showInputDialog(null,
                 "Replace (mario, mushroom, yoshi,\n" +
                         "star, flower, gameboy, dog, cat,\n" +
                         "pig, swan, face, plane, boat, car,\n" +
                         "heart, piranha, coin, shyguy, boo):",
                         "Instrument Replacer", JOptionPane.QUESTION_MESSAGE,
-                        null, null,	"Mario");
+                        null, res, "Mario");
+
         if (change == null)
             return;
 
@@ -60,13 +66,18 @@ public class InstrumentReplacerMain {
             return;
         }
 
+        res = ("mario mushroom yoshi " +
+                "star flower gameboy dog cat " +
+                "pig swan face plane boat car " +
+                "heart piranha coin shyguy boo delete").split("\\s");
+
         String changeTo = (String)JOptionPane.showInputDialog(null,
                 "With (mario, mushroom, yoshi,\n" +
                         "star, flower, gameboy, dog, cat,\n" +
                         "pig, swan, face, plane, boat, car,\n" +
                         "heart, piranha, coin, shyguy, boo,\n" +
                         "delete):", "Instrument Replacer",
-                        JOptionPane.QUESTION_MESSAGE, null, null, "Mushroom");
+                        JOptionPane.QUESTION_MESSAGE, null, res, "Mushroom");
         if (changeTo == null)
             return;
 
