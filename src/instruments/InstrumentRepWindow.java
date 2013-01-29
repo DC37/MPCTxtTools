@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -17,9 +18,13 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class InstrumentRepWindow extends JPanel implements ActionListener {
 
-    public InstrumentRepWindow(boolean b) {
+    /**
+     * The selection choices that one has when trying to replace instruments.
+     */
+    String [] res = null;
+
+    InstrumentRepWindow(boolean b) {
         super(new BorderLayout());
-        String [] res = null;
         if (b) {
             res = ("mario mushroom yoshi " +
                     "star flower gameboy dog cat " +
@@ -31,7 +36,21 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
                     "pig swan face plane boat car " +
                     "heart piranha coin shyguy boo delete").split("\\s");
         }
+    }
+    /**
+     * Creates a window that allows one to select different instruments
+     * for replacement.
+     * @param b Whether we're on the first window or the second window.
+     * Basically just checks whether it's possible to select "delete"
+     * or not.
+     */
+    public void makeWindow(boolean b) {
+        JPanel panelUpper = new InstrumentRepWindow(b);
         JComboBox selectorBox = new JComboBox(res);
+        JFrame theWindow = new JFrame();
+        theWindow.setContentPane(panelUpper);
+        theWindow.pack();
+        theWindow.setVisible(true);
     }
 
     @Override
