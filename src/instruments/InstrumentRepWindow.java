@@ -1,9 +1,11 @@
 package instruments;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,11 +23,25 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
     /**
      * The selection choices that one has when trying to replace instruments.
      */
-    String [] res = null;
+    static String [] res = null;
 
+    /** This denotes the current selected instrument. */
+    String theSelection = "mario";
+
+    /**
+     * This is the window that contains the buttons and combo box of this
+     * class.
+     */
+    static JFrame theWindow = null;
+
+    /**
+     * Initializes our array of Strings (<code>res</code>) to one of two sets:
+     * the first does not allow selection of "delete," while the second does.
+     * @param b False means you can't select "delete."
+     */
     InstrumentRepWindow(boolean b) {
         super(new BorderLayout());
-        if (b) {
+        if (!b) {
             res = ("mario mushroom yoshi " +
                     "star flower gameboy dog cat " +
                     "pig swan face plane boat car " +
@@ -44,18 +60,48 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
      * Basically just checks whether it's possible to select "delete"
      * or not.
      */
-    public void makeWindow(boolean b) {
+    public static void makeWindow(boolean b) {
         JPanel panelUpper = new InstrumentRepWindow(b);
         JComboBox selectorBox = new JComboBox(res);
-        JFrame theWindow = new JFrame();
+        selectorBox.setPreferredSize(new Dimension(50, 25));
+        panelUpper.add(selectorBox);
+        theWindow = new JFrame("Instrument Replacer");
+        JButton ok = new JButton("Ok");
+        ok.setPreferredSize(new Dimension(100, 30));
+        ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+
+        });
+        JButton cancel = new JButton("Cancel");
+        cancel.setPreferredSize(new Dimension(100, 30));
+        cancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+
+        });
+        JPanel panelLower = new JPanel();
+        panelUpper.add(panelLower, BorderLayout.SOUTH);
+        panelLower.add(ok);
+        panelLower.add(cancel);
         theWindow.setContentPane(panelUpper);
         theWindow.pack();
+        theWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theWindow.setVisible(true);
+        theWindow.setLocationRelativeTo(null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        JComboBox cb = (JComboBox) e.getSource();
+        theSelection = (String) cb.getSelectedItem();
     }
 
 }
