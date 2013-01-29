@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -40,7 +41,6 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
      * @param b False means you can't select "delete."
      */
     InstrumentRepWindow(boolean b) {
-        super(new BorderLayout());
         if (!b) {
             res = ("mario mushroom yoshi " +
                     "star flower gameboy dog cat " +
@@ -62,12 +62,12 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
      */
     public static void makeWindow(boolean b) {
         JPanel panelUpper = new InstrumentRepWindow(b);
+        panelUpper.setLayout(new BoxLayout(panelUpper, BoxLayout.PAGE_AXIS));
         JComboBox selectorBox = new JComboBox(res);
-        selectorBox.setPreferredSize(new Dimension(50, 25));
+        selectorBox.setPreferredSize(new Dimension(100, 25));
         panelUpper.add(selectorBox);
         theWindow = new JFrame("Instrument Replacer");
         JButton ok = new JButton("Ok");
-        ok.setPreferredSize(new Dimension(100, 30));
         ok.addActionListener(new ActionListener() {
 
             @Override
@@ -78,7 +78,6 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
 
         });
         JButton cancel = new JButton("Cancel");
-        cancel.setPreferredSize(new Dimension(100, 30));
         cancel.addActionListener(new ActionListener() {
 
             @Override
@@ -88,12 +87,19 @@ public class InstrumentRepWindow extends JPanel implements ActionListener {
 
         });
         JPanel panelLower = new JPanel();
-        panelUpper.add(panelLower, BorderLayout.SOUTH);
+        panelLower.setLayout(new BoxLayout(panelLower, BoxLayout.LINE_AXIS));
+        panelUpper.add(panelLower);
         panelLower.add(ok);
         panelLower.add(cancel);
+        cancel.setPreferredSize(new Dimension(100, 30));
+        ok.setPreferredSize(new Dimension(100, 30));
+        JButton panelSides = new JButton("");
+        panelSides.setBorderPainted(false);
+        panelSides.setBorder(null);
         theWindow.setContentPane(panelUpper);
         theWindow.pack();
         theWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        theWindow.setResizable(true);
         theWindow.setVisible(true);
         theWindow.setLocationRelativeTo(null);
     }
