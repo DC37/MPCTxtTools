@@ -1,5 +1,4 @@
 package instruments;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import errorChecking.ErrorDialogs;
 
@@ -27,8 +26,10 @@ public class InstrumentReplacerMain {
     public static void start(File fileName) {
         if(fileName==null)
             return;
+
         InstrumentReplacer replace = new InstrumentReplacer();
         putInstruments();
+
         try {
             Scanner file = new Scanner(fileName);
             String songText = file.nextLine();
