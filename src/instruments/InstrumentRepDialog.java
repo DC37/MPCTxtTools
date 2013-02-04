@@ -23,7 +23,7 @@ import javax.swing.border.LineBorder;
  * @since 1.07
  * @since 2013.0131
  */
-public class InstrumentRepDialog implements ActionListener {
+public class InstrumentRepDialog {
 
     /**
      * The amount of padding that we want between different components
@@ -100,8 +100,51 @@ public class InstrumentRepDialog implements ActionListener {
         return null;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    /**
+     * Listens for when the Ok button is pressed.
+     * @author RehdBlob
+     * @since 2013.0204
+     * @since 1.07
+     */
+    class OkButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+
+    /**
+     * Listens for when we've made a selection.
+     * @author RehdBlob
+     * @since 2013.0204
+     * @since 1.07
+     */
+    class ComboBoxListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+
+    /**
+     * Listens for when the Cancel button is pressed.
+     * @author RehdBlob
+     * @since 2013.0204
+     * @since 1.07
+     */
+    class CancelButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+
+        }
 
     }
 
