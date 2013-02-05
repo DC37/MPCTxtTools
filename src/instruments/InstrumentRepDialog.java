@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -56,18 +57,24 @@ public class InstrumentRepDialog {
      */
     static String showInstrumentDialog() {
         JComboBox theBox = new JComboBox(res);
-        return showDialog(theBox);
+        JLabel theLabel = new JLabel("Select the instrument you want to "
+                + "replace.");
+        return showDialog(theBox, theLabel);
     }
 
     /**
      * Shows the second dialog we want, which is a selection of the 19
      * instruments plus a delete option.
+     * @param The String representation of the instrument that we are
+     * replacing.
      * @return A String representing the instrument that we want to replace
      * the first instrument with.
      */
-    static String showReplacementDialog() {
+    static String showReplacementDialog(String inst) {
         JComboBox theBox = new JComboBox(rep);
-        return showDialog(theBox);
+        JLabel theLabel = new JLabel("Select the instrument you want to replace"
+                + "the " + inst +  " with.");
+        return showDialog(theBox, theLabel);
     }
 
     /**
@@ -76,25 +83,32 @@ public class InstrumentRepDialog {
      * @param theBox The ComboBox holding some set of options.
      * @return A String representing the selection that we've made.
      */
-    private static String showDialog(JComboBox theBox) {
+    private static String showDialog(JComboBox theBox, JLabel theLabel) {
         JFrame theFrame = new JFrame("Instrument Replacer");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
         JButton ok = new JButton("Ok");
         JButton cancel = new JButton("Cancel");
         ok.setPreferredSize(new Dimension(75, 25));
         cancel.setPreferredSize(new Dimension(75, 25));
 
-        JPanel panelLower = new JPanel();
-        JPanel panelSouth = new JPanel();
-        panelSouth.setLayout(new BoxLayout(panelSouth, BoxLayout.LINE_AXIS));
-        JPanel panelEast = new JPanel();
-        JPanel panelWest = new JPanel();
+        JPanel theButtons = new JPanel();
+        JPanel panelUnder = new JPanel();
+        panelUnder.setLayout(new BoxLayout(panelUnder, BoxLayout.Y_AXIS));
+        JPanel panelNorth = new JPanel();
 
-        panelLower.add(ok);
-        panelLower.add(cancel);
-        panelSouth.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
-        panelLower.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
-        theFrame.setContentPane(panelLower);
+        panelNorth.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
+        panelNorth.add(theBox);
+        theButtons.add(ok);
+        theButtons.add(cancel);
+        panelUnder.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
+        theButtons.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
+        panelUnder.add(panelNorth);
+        panelUnder.add(theButtons);
+
+        theFrame.setContentPane(panelUnder);
+        theFrame.setSize(300, 200);
         theFrame.setLocationRelativeTo(null);
         theFrame.setVisible(true);
         return null;
