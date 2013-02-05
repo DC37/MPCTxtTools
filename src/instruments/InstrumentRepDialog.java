@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import errorChecking.Cancel;
+
 /**
  * This is the custom window class for the Instrument Replacer.
  * For some reason, JOptionPane likes to make things into a JList
@@ -27,11 +29,16 @@ import javax.swing.border.LineBorder;
  */
 public class InstrumentRepDialog {
 
+    /** The current selection that we've made in the combobox. */
+    private static String selection = "mario";
+
+    private static InstrumentRepDialog encloser = new InstrumentRepDialog();
+
     /**
-     * The amount of padding that we want between different components
-     * in this window.
+     * The Thread that prevents the function call from exiting until
+     * we've actually made a selection.
      */
-    private static final int PAD = 10;
+    private static Thread waiter = new InstrumentRepDialogThread();
 
     /**
      * The different options that one can choose for the instrument
@@ -87,6 +94,7 @@ public class InstrumentRepDialog {
      */
     private static String showDialog(JComboBox theBox,
             JLabel labelUpper, JLabel labelLower) {
+        waiter.start();
         JFrame theFrame = new JFrame("Instrument Replacer");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -104,6 +112,35 @@ public class InstrumentRepDialog {
         JPanel panelNorth = new JPanel();
         panelNorth.setLayout(new BoxLayout(panelNorth, BoxLayout.Y_AXIS));
 
+        ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                waiter.interrupt();
+            }
+
+        });
+
+        cancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selection = null;
+                waiter.interrupt();
+            }
+
+        });
+
+        theBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selection = (String)
+                        ((JComboBox)e.getSource()).getSelectedItem();
+            }
+
+        });
+
         comboBox.add(theBox);
         theButtons.add(ok);
         theButtons.add(cancel);
@@ -120,55 +157,19 @@ public class InstrumentRepDialog {
         theFrame.setLocationRelativeTo(null);
         theFrame.setResizable(false);
         theFrame.setVisible(true);
-        return null;
-    }
 
-    /**
-     * Listens for when the Ok button is pressed.
-     * @author RehdBlob
-     * @since 2013.0204
-     * @since 1.07
-     */
-    class OkButtonListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-
+        while(waiter.isAlive()) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                continue;
+            }
         }
 
-    }
-
-    /**
-     * Listens for when we've made a selection.
-     * @author RehdBlob
-     * @since 2013.0204
-     * @since 1.07
-     */
-    class ComboBoxListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-
-        }
-
-    }
-
-    /**
-     * Listens for when the Cancel button is pressed.
-     * @author RehdBlob
-     * @since 2013.0204
-     * @since 1.07
-     */
-    class CancelButtonListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-
-        }
-
+        String theSelection = selection;
+        selection = "mario";
+        theFrame.dispose();
+        return theSelection;
     }
 
 }
