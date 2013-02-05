@@ -1,6 +1,7 @@
 package instruments;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,7 +37,7 @@ public class InstrumentRepDialog {
      * The different options that one can choose for the instrument
      * to be replaced.
      */
-    private static String [] rep = ("mario mushroom yoshi " +
+    private static String [] res = ("mario mushroom yoshi " +
             "star flower gameboy dog cat " +
             "pig swan face plane boat car " +
             "heart piranha coin shyguy boo").split("\\s");
@@ -45,7 +46,7 @@ public class InstrumentRepDialog {
      * The different options that one can choose for the instrument
      * to replace the original.
      */
-    private static String [] res = ("mario mushroom yoshi " +
+    private static String [] rep = ("mario mushroom yoshi " +
             "star flower gameboy dog cat " +
             "pig swan face plane boat car " +
             "heart piranha coin shyguy boo delete").split("\\s");
@@ -57,9 +58,9 @@ public class InstrumentRepDialog {
      */
     static String showInstrumentDialog() {
         JComboBox theBox = new JComboBox(res);
-        JLabel theLabel = new JLabel("Select the instrument you want to "
-                + "replace.");
-        return showDialog(theBox, theLabel);
+        JLabel labelUpper = new JLabel("Select the instrument you want");
+        JLabel labelLower = new JLabel(" to replace.");
+        return showDialog(theBox, labelUpper, labelLower);
     }
 
     /**
@@ -72,9 +73,10 @@ public class InstrumentRepDialog {
      */
     static String showReplacementDialog(String inst) {
         JComboBox theBox = new JComboBox(rep);
-        JLabel theLabel = new JLabel("Select the instrument you want to replace"
+        JLabel labelUpper = new JLabel("Select the instrument you want");
+        JLabel labelLower = new JLabel(" to replace "
                 + "the " + inst +  " with.");
-        return showDialog(theBox, theLabel);
+        return showDialog(theBox, labelUpper, labelLower);
     }
 
     /**
@@ -83,11 +85,12 @@ public class InstrumentRepDialog {
      * @param theBox The ComboBox holding some set of options.
      * @return A String representing the selection that we've made.
      */
-    private static String showDialog(JComboBox theBox, JLabel theLabel) {
+    private static String showDialog(JComboBox theBox,
+            JLabel labelUpper, JLabel labelLower) {
         JFrame theFrame = new JFrame("Instrument Replacer");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        theBox.setPreferredSize(new Dimension(150, 25));
         JButton ok = new JButton("Ok");
         JButton cancel = new JButton("Cancel");
         ok.setPreferredSize(new Dimension(75, 25));
@@ -95,21 +98,27 @@ public class InstrumentRepDialog {
 
         JPanel theButtons = new JPanel();
         JPanel panelUnder = new JPanel();
-        panelUnder.setLayout(new BoxLayout(panelUnder, BoxLayout.Y_AXIS));
-        JPanel panelNorth = new JPanel();
+        panelUnder.setLayout(new FlowLayout());
+        JPanel comboBox = new JPanel();
 
-        panelNorth.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
-        panelNorth.add(theBox);
+        JPanel panelNorth = new JPanel();
+        panelNorth.setLayout(new BoxLayout(panelNorth, BoxLayout.Y_AXIS));
+
+        comboBox.add(theBox);
         theButtons.add(ok);
         theButtons.add(cancel);
-        panelUnder.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
-        theButtons.setBorder(new EmptyBorder(PAD, PAD, PAD, PAD));
+
+
+        panelNorth.add(labelUpper);
+        panelNorth.add(labelLower);
         panelUnder.add(panelNorth);
+        panelUnder.add(comboBox);
         panelUnder.add(theButtons);
 
         theFrame.setContentPane(panelUnder);
-        theFrame.setSize(300, 200);
+        theFrame.setSize(220, 160);
         theFrame.setLocationRelativeTo(null);
+        theFrame.setResizable(false);
         theFrame.setVisible(true);
         return null;
     }
