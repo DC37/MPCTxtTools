@@ -27,8 +27,7 @@ import fileSplitter.FileSplitterMain;
  * @since 1.00a
  * @since 2011.0802
  */
-public class MPCTxtToolsMain
-{
+public class MPCTxtToolsMain {
 
     private static final String genHelp = "Mario Paint Composer Text Tools\n" +
             "Programmed by: RehdBlob (c)2011-2013\n" +
@@ -65,12 +64,6 @@ public class MPCTxtToolsMain
             "3. The program will now increase the tempo of that file by the\n" +
             "specified number of times, creating intermediate files and\n" +
             "updating the MarioPaintSongList.txt file if necessary.";
-
-
-    /*public static void main(String [] args) {
-		MainMenu m = new MainMenu(null);
-		m.setVisible(true);
-	}*/
 
     /**
      * Outputs the main menu of the program.
