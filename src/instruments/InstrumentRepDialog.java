@@ -29,16 +29,11 @@ import errorChecking.Cancel;
  */
 public class InstrumentRepDialog {
 
+    /** Tells us whether to continue waiting for user input. */
+    private static boolean cont;
+
     /** The current selection that we've made in the combobox. */
-    private static String selection = "mario";
-
-    private static InstrumentRepDialog encloser = new InstrumentRepDialog();
-
-    /**
-     * The Thread that prevents the function call from exiting until
-     * we've actually made a selection.
-     */
-    private static Thread waiter = new InstrumentRepDialogThread();
+    private static String selection = null;
 
     /**
      * The different options that one can choose for the instrument
@@ -94,9 +89,9 @@ public class InstrumentRepDialog {
      */
     private static String showDialog(JComboBox theBox,
             JLabel labelUpper, JLabel labelLower) {
-        waiter.start();
+        cont = true;
         JFrame theFrame = new JFrame("Instrument Replacer");
-        theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        theFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         theBox.setPreferredSize(new Dimension(150, 25));
         JButton ok = new JButton("Ok");
@@ -116,7 +111,7 @@ public class InstrumentRepDialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                waiter.interrupt();
+                cont = false;
             }
 
         });
@@ -126,7 +121,7 @@ public class InstrumentRepDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selection = null;
-                waiter.interrupt();
+                cont = false;
             }
 
         });
@@ -158,9 +153,12 @@ public class InstrumentRepDialog {
         theFrame.setResizable(false);
         theFrame.setVisible(true);
 
-        while(waiter.isAlive()) {
+        while(cont) {
             try {
                 Thread.sleep(1);
+                if (!theFrame.isVisible()) {
+                    break;
+                }
             } catch (InterruptedException e) {
                 continue;
             }
