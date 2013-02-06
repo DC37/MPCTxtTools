@@ -20,9 +20,18 @@ import java.util.Scanner;
  * @since 2011.0802
  */
 public class InstrumentReplacerMain {
+
+    /**
+     * The hashtable that holds all of the different key-value pairs
+     * for our instrument links.
+     */
     public static Hashtable<String, Character> instruments =
             new Hashtable<String, Character>();
 
+    /**
+     * 
+     * @param fileName
+     */
     public static void start(File fileName) {
         if(fileName==null)
             return;
