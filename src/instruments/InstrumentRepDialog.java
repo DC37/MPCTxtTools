@@ -11,10 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
-import errorChecking.Cancel;
 
 /**
  * This is the custom window class for the Instrument Replacer.
