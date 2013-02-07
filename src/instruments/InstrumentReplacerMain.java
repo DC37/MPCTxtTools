@@ -29,8 +29,9 @@ public class InstrumentReplacerMain {
             new Hashtable<String, Character>();
 
     /**
-     * 
-     * @param fileName
+     * Starts the InstrumentReplacer program.
+     * @param fileName The file that we are performing some instrument
+     * replacement operation on.
      */
     public static void start(File fileName) {
         if(fileName==null)
@@ -53,11 +54,6 @@ public class InstrumentReplacerMain {
             e.printStackTrace();
             return;
         }
-
-        String [] res = ("mario mushroom yoshi " +
-                "star flower gameboy dog cat " +
-                "pig swan face plane boat car " +
-                "heart piranha coin shyguy boo").split("\\s");
 
         String change = InstrumentRepDialog.showInstrumentDialog();
 

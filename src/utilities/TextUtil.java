@@ -18,34 +18,24 @@ import errorChecking.NoTextException;
  */
 public class TextUtil {
 
-    Pattern noteLine = Pattern.compile("(()()()()()()):");
-
+    /**
+     * This is the pattern that denotes a line of notes.
+     */
+    private Pattern noteLine = Pattern.compile("(()()()()()()):");
 
     /**
-     * @since 1.05
-     * @since 2011.0902
+     * Uses regex to clean up an MPC text file
      * @param t The song text file to be "cleaned," that is, the
      * song file that has unnecessarily empty note lines.
      * @return The "cleaned" string.
+     * @since 1.07
+     * @since 2013.0205
      */
     public static String clean(String t) {
-        int i = t.indexOf("++++++");
-        if (i == -1)
-            return t.substring(0,t.indexOf('"')) + t.substring(t.indexOf('"') + 1);
-        String out = "";
-        while(t.indexOf(':')!=-1) {
-            String piece = t.substring(0,t.indexOf(':')+1);
-            if(piece.indexOf("++++++")!= -1 & piece.indexOf("++++++")==0) {
-                out += ":";
-                t = t.substring(t.indexOf(':')+1);
-            } else {
-                out += piece;
-                t = t.substring(t.indexOf(':')+1);
-            }
-        }
-        out += t;
-        return out;
+        t.replaceAll("++++++q:", ":");
+        return t;
     }
+
 
     /**
      * Displays an information dialog given a title and text to
