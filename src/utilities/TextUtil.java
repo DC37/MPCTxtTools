@@ -18,10 +18,23 @@ import errorChecking.NoTextException;
  */
 public class TextUtil {
 
+    /** This is the regex pattern that denotes a note in an MPC text file. */
+    private static String note = "[a-z]?[a-z]?[#;]?";
+
+    /** This is the regex pattern that denotes a kind of a concat operator. */
+    private static String plus = "+?";
+
+    /** This is the regex pattern that denotes a volume reading. */
+    private static String vol = "[a-z]?:";
+
+    /** This is the regex pattern that denotes a line of notes. */
+    private static String noteLine = note + plus + note + plus + note + plus
+            + note + plus + note + plus + note + plus + vol;
+
     /**
      * This is the pattern that denotes a line of notes.
      */
-    private Pattern noteLine = Pattern.compile("(()()()()()()):");
+    private Pattern line = Pattern.compile(noteLine);
 
     /**
      * Uses regex to clean up an MPC text file
