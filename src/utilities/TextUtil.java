@@ -24,17 +24,58 @@ public class TextUtil {
     /** This is the regex pattern that denotes a kind of a concat operator. */
     private static String plus = "+?";
 
+    /**
+     * This is the regex pattern that denotes a kind of a concat operator but
+     * forces you to have at least one of them.
+     */
+    private static String plusForce = "+{1}";
+
     /** This is the regex pattern that denotes a volume reading. */
     private static String vol = "[a-z]?:";
 
-    /** This is the regex pattern that denotes a line of notes. */
-    private static String noteLine = note + plus + note + plus + note + plus
-            + note + plus + note + plus + note + plus + vol;
+    /**
+     * This is a regex pattern that catches a note and a plus sign
+     * of the form ab;+
+     */
+    private static String noteCat = note + plus;
+
+    /**
+     * This is a regex pattern that catches a note and a plus sign
+     * of the form ab;+ but forces you to catch the plus.
+     */
+    private static String noteCatForce = note + plusForce;
+
+    /**
+     * This is the regex pattern that denotes a line of notes.
+     * The format must be able to catch all lines in the form
+     * ab+cd+ef+gh+ij+q:
+     * or ++++++q:
+     * or :
+     */
+    private static String noteLine = noteCat + noteCat + noteCat + noteCat
+            + noteCat + vol;
+
+    /**
+     * This is the regex pattern that denotes a line of notes.
+     * The format will be able to catch all of the linse in the form
+     * ab+cd+ef+gh+ij+q:
+     * or ++++++q:
+     * but not :
+     */
+    private static String noteLineForce = noteCatForce + noteCatForce
+            + noteCatForce + noteCatForce + noteCatForce + noteCatForce
+            + vol;
 
     /**
      * This is the pattern that denotes a line of notes.
      */
-    private Pattern line = Pattern.compile(noteLine);
+    private static Pattern line = Pattern.compile(noteLine);
+
+    /**
+     * This is the pattern that denotes a line of notes that will have
+     * at least some form of volume.
+     */
+    private static Pattern lineForce = Pattern.compile(noteLineForce);
 
     /**
      * Uses regex to clean up an MPC text file
@@ -45,8 +86,7 @@ public class TextUtil {
      * @since 2013.0205
      */
     public static String clean(String t) {
-        t.replaceAll("++++++q:", ":");
-        return t;
+        return t.replaceAll("++++++q:", ":");
     }
 
 
@@ -60,8 +100,8 @@ public class TextUtil {
      * @throws NoTextException If the <b>text</b> parameter happens
      * to be <b>null</b> or equals the empty "" string.
      */
-    public static void infoDialog(String title, String text) throws NoTextException
-    {
+    public static void infoDialog(String title, String text)
+            throws NoTextException {
         if (text == null | text.equals(""))
             throw new NoTextException();
         JOptionPane.showMessageDialog(null, text, title,
@@ -76,13 +116,11 @@ public class TextUtil {
      * @return All note lines that have data in them.
      */
     public static ArrayList<String> chop(String s) {
+        s = clean(s);
         ArrayList<String> result = new ArrayList<String>();
-        while (s.length() != 0 & s.indexOf(':') != -1)
-        {
-            result.add(s.substring(0,s.indexOf(':')+1));
-            s = s.substring(s.indexOf(':')+1);
-            if (s.indexOf('+')==-1)
-                break;
+        Matcher m = line.matcher(s);
+        while (m.find()) {
+            result.add(m.group());
         }
         return result;
     }
@@ -95,7 +133,22 @@ public class TextUtil {
      * @return The song text file with the time signature and tempo removed.
      */
     public static String slice(String read) {
-        return read.substring(read.indexOf('*')+1,read.lastIndexOf(':')+1);
+        return read.substring(read.indexOf('*') + 1,read.lastIndexOf(':') + 1);
+    }
+
+    /**
+     * Splits a single MPC note line into its singular
+     * instrumental components.
+     * @param s The MPC note line to be converted into an ArrayList.
+     */
+    public static ArrayList<String> separate(String s) {
+        ArrayList<String> result = new ArrayList<String>();
+        while (s.indexOf('+')!= -1) {
+            result.add(s.substring(0,s.indexOf('+')+1));
+            s = s.substring(s.indexOf('+')+1);
+        }
+        result.add(s);
+        return result;
     }
 
     /**
@@ -104,7 +157,7 @@ public class TextUtil {
      * @return The time signature of the song text file.
      */
     public static String getStart(String read) {
-        return read.substring(0,read.indexOf('*')+1);
+        return read.substring(0,read.indexOf('*') + 1);
     }
 
     /**
@@ -113,6 +166,21 @@ public class TextUtil {
      * @return The tempo of the song text file.
      */
     public static String getEnd(String read) {
-        return read.substring(read.lastIndexOf(':')+1);
+        return read.substring(read.lastIndexOf(':') + 1);
+    }
+
+    /**
+     * Checks the number of lines in an MPC text file.
+     * @param read The text file that we have fed to the function.
+     * @return The number of lines in this MPC text file. Ideally,
+     * this number is 384.
+     */
+    public static int checkLines(String read) {
+        Matcher m = line.matcher(read);
+        int counter = 0;
+        while (m.find()) {
+            counter++;
+        }
+        return counter;
     }
 }

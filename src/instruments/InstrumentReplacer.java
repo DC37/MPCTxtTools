@@ -19,19 +19,19 @@ import static utilities.TextUtil.*;
 
 public class InstrumentReplacer {
 
-    /** */
+    /** This is the song data. */
     private String text  = "";
 
-    /** */
+    /** This is the header for the song. It tends to be the time signature. */
     private String start = "";
 
-    /** */
+    /** This is the footer for the song. It tends to be the tempo. */
     private String end   = "";
 
-    /** */
+    /** This is the song data, in pieces. */
     private ArrayList<String> pieces = new ArrayList<String>();
 
-    /** */
+    /** This is the file that we're writing to. */
     private File file  = null;
 
     /**
