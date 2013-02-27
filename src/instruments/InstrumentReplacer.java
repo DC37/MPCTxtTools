@@ -91,22 +91,6 @@ public class InstrumentReplacer {
     }
 
     /**
-     * Splits a single MPC note line into its singular
-     * instrumental components.
-     * @param s The MPC note line to be converted into an ArrayList.
-     */
-    private ArrayList<String> separate(String s) {
-
-        ArrayList<String> result = new ArrayList<String>();
-        while (s.indexOf('+')!= -1) {
-            result.add(s.substring(0,s.indexOf('+')+1));
-            s = s.substring(s.indexOf('+')+1);
-        }
-        result.add(s);
-        return result;
-    }
-
-    /**
      * Backs up the original text file to a file with "old" appended
      * to the end of the file name.
      * @since 1.00a
