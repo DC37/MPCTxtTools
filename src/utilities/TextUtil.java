@@ -22,13 +22,13 @@ public class TextUtil {
     private static String note = "[a-z]?[a-z]?[#;]?";
 
     /** This is the regex pattern that denotes a kind of a concat operator. */
-    private static String plus = "+?";
+    private static String plus = "\\+?";
 
     /**
      * This is the regex pattern that denotes a kind of a concat operator but
      * forces you to have at least one of them.
      */
-    private static String plusForce = "+{1}";
+    private static String plusForce = "\\+{1}";
 
     /** This is the regex pattern that denotes a volume reading. */
     private static String vol = "[a-z]?:";
@@ -57,7 +57,7 @@ public class TextUtil {
 
     /**
      * This is the regex pattern that denotes a line of notes.
-     * The format will be able to catch all of the linse in the form
+     * The format will be able to catch all of the lines in the form
      * ab+cd+ef+gh+ij+q:
      * or ++++++q:
      * but not :
@@ -86,7 +86,7 @@ public class TextUtil {
      * @since 2013.0205
      */
     public static String clean(String t) {
-        return t.replaceAll("++++++q:", ":");
+        return t.replaceAll("\\+\\+\\+\\+\\+\\+q:", ":");
     }
 
 
@@ -175,7 +175,7 @@ public class TextUtil {
      * @return The number of lines in this MPC text file. Ideally,
      * this number is 384.
      */
-    public static int checkLines(String read) {
+    public static int countLines(String read) {
         Matcher m = line.matcher(read);
         int counter = 0;
         while (m.find()) {
