@@ -1,14 +1,14 @@
 Implement:
 -Split multiple times
 -Tempo gap detection on/off
--File split with option to go 96 measures at a time
--Drop-down menu select file interface
 -Rename files
 -Copy-paste pieces
 -Copy-paste over notes
 
 1.07
 -Restructured instrument replacer to be less buggy
+-Drop-down menu select file interface
+-File split with option to go 96 measures at a time
 
 1.06
 -Revamp of UI to make it more intuitive

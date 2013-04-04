@@ -18,32 +18,32 @@ import errorChecking.NoTextException;
  */
 public class TextUtil {
 
-    /** This is the regex pattern that denotes a note in an MPC text file. */
-    private static String note = "[a-z]?[a-z]?[#;]?";
+    /**
+     * This is the regex pattern that denotes a note in an MPC text file. It
+     * should also be able to catch "glitch" notes of the form a17
+     */
+    private static final String note = "([a-z][a-z[[0-9][0-9]]][#;])?";
 
     /** This is the regex pattern that denotes a kind of a concat operator. */
-    private static String plus = "\\+?";
+    private static final String plus = "\\+";
 
     /**
      * This is the regex pattern that denotes a kind of a concat operator but
      * forces you to have at least one of them.
      */
-    private static String plusForce = "\\+{1}";
-
-    /** This is the regex pattern that denotes a volume reading. */
-    private static String vol = "[a-z]?:";
+    private static final String plusForce = "\\+{1}";
 
     /**
      * This is a regex pattern that catches a note and a plus sign
      * of the form ab;+
      */
-    private static String noteCat = note + plus;
+    private static final String noteCat = note + plus;
 
     /**
      * This is a regex pattern that catches a note and a plus sign
      * of the form ab;+ but forces you to catch the plus.
      */
-    private static String noteCatForce = note + plusForce;
+    private static final String noteCatForce = note + plusForce;
 
     /**
      * This is the regex pattern that denotes a line of notes.
@@ -52,8 +52,8 @@ public class TextUtil {
      * or ++++++q:
      * or :
      */
-    private static String noteLine = noteCat + noteCat + noteCat + noteCat
-            + noteCat + vol;
+    private static final String noteLine = "(" + noteCat + noteCat
+            + noteCat + noteCat + noteCat + "[a-z])?:";
 
     /**
      * This is the regex pattern that denotes a line of notes.
@@ -62,20 +62,20 @@ public class TextUtil {
      * or ++++++q:
      * but not :
      */
-    private static String noteLineForce = noteCatForce + noteCatForce
-            + noteCatForce + noteCatForce + noteCatForce + noteCatForce
-            + vol;
+    private static final String noteLineForce = "(" + noteCatForce
+            + noteCatForce + noteCatForce + noteCatForce
+            + noteCatForce + "[a-z])?:";
 
     /**
      * This is the pattern that denotes a line of notes.
      */
-    private static Pattern line = Pattern.compile(noteLine);
+    private static final Pattern line = Pattern.compile(noteLine);
 
     /**
      * This is the pattern that denotes a line of notes that will have
      * at least some form of volume.
      */
-    private static Pattern lineForce = Pattern.compile(noteLineForce);
+    private static final Pattern lineForce = Pattern.compile(noteLineForce);
 
     /**
      * Uses regex to clean up an MPC text file
@@ -119,9 +119,8 @@ public class TextUtil {
         s = clean(s);
         ArrayList<String> result = new ArrayList<String>();
         Matcher m = line.matcher(s);
-        while (m.find()) {
+        while (m.find())
             result.add(m.group());
-        }
         return result;
     }
 
