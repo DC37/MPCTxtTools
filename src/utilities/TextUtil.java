@@ -109,6 +109,20 @@ public class TextUtil {
     }
 
     /**
+     * "Dices" a note line into its component instruments.
+     * @param s The note line.
+     * @return An ArrayList of strings that denotes each set of
+     * instruments.
+     */
+    public static ArrayList<String> dice(String s) {
+        ArrayList<String> out = new ArrayList<String>();
+        Matcher m = Pattern.compile(note).matcher(s);
+        while (m.find())
+            out.add(m.group());
+        return out;
+    }
+
+    /**
      * @since 1.05
      * @since 2011.1108
      * @param s The song text file that is to be "chopped" into

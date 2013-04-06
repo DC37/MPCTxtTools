@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import utilities.TextUtil;
+
 import static utilities.TextUtil.*;
 
 
@@ -88,6 +90,30 @@ public class InstrumentReplacer {
         out += end;
         out = clean(out);
         return out;
+    }
+
+    /**
+     * Uses a newer schema to replace all of one instrument with another.
+     * @param change The character to change.
+     * @param changeTo The character to change to.
+     * @return The full MPC raw song data that is to be written
+     * into the file, with the correct instruments replaced.
+     */
+    public String changeNew(char change, char changeTo) {
+        String out = start;
+        boolean delete = (changeTo == 't');
+        for (String s : pieces) {
+            StringBuilder st = new StringBuilder();
+            ArrayList<String> notes = TextUtil.dice(s);
+            for (String inst : notes) {
+                char [] theStr = inst.toCharArray();
+                if (theStr[0] == change)
+                    theStr[0] = changeTo;
+                st.append(theStr);
+                // TODO: Fix.
+            }
+
+        }
     }
 
     /**
