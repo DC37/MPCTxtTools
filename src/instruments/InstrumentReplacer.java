@@ -110,10 +110,10 @@ public class InstrumentReplacer {
                 if (theStr[0] == change)
                     theStr[0] = changeTo;
                 st.append(theStr);
-                // TODO: Fix.
+                st.append("+");
             }
-
         }
+        return out;
     }
 
     /**
