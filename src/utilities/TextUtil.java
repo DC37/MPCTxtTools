@@ -116,7 +116,7 @@ public class TextUtil {
      */
     public static ArrayList<String> dice(String s) {
         ArrayList<String> out = new ArrayList<String>();
-        Matcher m = Pattern.compile(note).matcher(s);
+        Matcher m = Pattern.compile(noteLine).matcher(s);
         while (m.find())
             out.add(m.group());
         return out;
