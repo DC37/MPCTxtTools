@@ -14,7 +14,7 @@ import utilities.TextUtil;
 public class NoteLine {
 
     /** THe number of notes in an MPC song. */
-    private static final int NOTESIZE = 5;
+    private static final int NOTESIZE = 6;
 
     /** List of notes in this line. */
     private ArrayList<String> notes;
@@ -33,6 +33,11 @@ public class NoteLine {
      * @param parse This is the String that we are attempting to parse.
      */
     public NoteLine(String parse) throws ParseException {
+        if (parse.length() < 7) {
+            notes = new ArrayList<String>();
+            vol = 'q';
+            return;
+        }
         notes = TextUtil.dice(parse);
         vol = parse.charAt(parse.length() - 2);
         if (!(vol >= 'a' && vol <= 'q'))
