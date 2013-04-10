@@ -35,6 +35,8 @@ public class NoteLine {
     public NoteLine(String parse) throws ParseException {
         if (parse.length() < 7) {
             notes = new ArrayList<String>();
+            for (int i = 0; i < NOTESIZE; i++)
+                notes.add("");
             vol = 'q';
             return;
         }
@@ -48,6 +50,21 @@ public class NoteLine {
 
     @Override
     public String toString() {
-        return "";
+        StringBuilder s = new StringBuilder();
+        int empty = 0;
+        for (String s1 : notes)
+            if (s1.isEmpty())
+                empty++;
+        if (!(empty == NOTESIZE && vol == 'q')) {
+            if (!(vol == 'q')) {
+                for (String s1 : notes) {
+                    s.append(s1);
+                    s.append("+");
+                }
+            }
+            s.append(vol);
+        }
+        s.append(":");
+        return s.toString();
     }
 }
