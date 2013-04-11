@@ -33,7 +33,7 @@ public class NoteLine {
      * @param parse This is the String that we are attempting to parse.
      */
     public NoteLine(String parse) throws ParseException {
-        if (parse.length() < 7) {
+        if (parse.length() < NOTESIZE + 1) {
             notes = new ArrayList<String>();
             for (int i = 0; i < NOTESIZE; i++)
                 notes.add("");
@@ -46,6 +46,31 @@ public class NoteLine {
             vol = 'q';
         if (notes.size() != NOTESIZE)
             throw new ParseException("Incorrect number of notes in a line!", 0);
+    }
+
+    /**
+     * @return The volume of the notes in this note line.
+     */
+    public char vol() {
+        return vol;
+    }
+
+    /**
+     * @return The list of notes that this note line has.
+     */
+    public ArrayList<String> notes() {
+        return notes;
+    }
+
+    /**
+     * Gets a specific note at location x from this note line.
+     * @param x The index at which we want to grab a note from.
+     * @return The note at that index.
+     */
+    public String notes(int x) {
+        if (x < 0 || x > notes.size() - 1)
+            return null;
+        return notes.get(x);
     }
 
     @Override

@@ -50,6 +50,16 @@ public class InstrumentRepDialog {
             "heart piranha coin shyguy boo delete").split("\\s");
 
     /**
+     * Shows a single, hopefully intuitive, dialog that asks us which
+     * instruments we want to replace and replace with.
+     * @return A two-character String that starts with the character we
+     * want to replace and the character we want to replace it with.
+     */
+    static String showInstrumentRepDialog() {
+        return showDialog(theBox, labelUpper, labelMiddle, labelLower);
+    }
+
+    /**
      * Shows the first dialog we want, which is a selection of the 19
      * instruments.
      * @return A String representing the instrument that we selected.

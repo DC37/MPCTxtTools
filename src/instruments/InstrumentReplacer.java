@@ -2,6 +2,7 @@ package instruments;
 
 import java.io.File;
 import java.io.PrintStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -34,7 +35,10 @@ public class InstrumentReplacer {
     private ArrayList<String> pieces = new ArrayList<String>();
 
     /** This is the file that we're writing to. */
-    private File file  = null;
+    private File file;
+
+    /** This means that there was some error in parsing a note line. */
+    private boolean error;
 
     /**
      * Initializes the Instrument Replacer's <b>text</b>, <b>start</b>,
@@ -104,13 +108,20 @@ public class InstrumentReplacer {
         boolean delete = (changeTo == 't');
         for (String s : pieces) {
             StringBuilder st = new StringBuilder();
-            ArrayList<String> notes = TextUtil.dice(s);
-            for (String inst : notes) {
-                char [] theStr = inst.toCharArray();
-                if (theStr[0] == change)
-                    theStr[0] = changeTo;
-                st.append(theStr);
-                st.append("+");
+            try {
+                NoteLine n = new NoteLine(s);
+                ArrayList<String> notes = n.notes();
+                for (int i = 0; i < notes.size(); i++) {
+                    String str = notes.get(i);
+                    if (delete && str.charAt(0) == change)
+                        notes.set(i, "");
+                    else if (str.charAt(0) == change)
+                        notes.set(i, "" + changeTo + str.substring(1));
+                }
+                st.append(n.toString());
+            } catch (ParseException e) {
+                st.append(":");
+                error = true;
             }
         }
         return out;
