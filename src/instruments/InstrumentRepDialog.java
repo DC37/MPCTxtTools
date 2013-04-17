@@ -56,7 +56,14 @@ public class InstrumentRepDialog {
      * want to replace and the character we want to replace it with.
      */
     static String showInstrumentRepDialog() {
-        return showDialog(theBox, labelUpper, labelMiddle, labelLower);
+        JComboBox theBox = new JComboBox(res);
+        JLabel labelUpper = new JLabel("Select the instrument you want");
+        JLabel labelUpperMid = new JLabel(" to replace.");
+        JComboBox theSecondBox = new JComboBox(rep);
+        JLabel labelLowerMid = new JLabel("Select the replacement");
+        JLabel labelLower = new JLabel(" instrument.");
+        return showDualDialog(theBox, theSecondBox,
+                labelUpper, labelUpperMid, labelLowerMid, labelLower);
     }
 
     /**
@@ -95,6 +102,98 @@ public class InstrumentRepDialog {
      */
     private static String showDialog(JComboBox theBox,
             JLabel labelUpper, JLabel labelLower) {
+        cont = true;
+        JFrame theFrame = new JFrame("Instrument Replacer");
+        theFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        theBox.setPreferredSize(new Dimension(150, 25));
+        JButton ok = new JButton("Ok");
+        JButton cancel = new JButton("Cancel");
+        ok.setPreferredSize(new Dimension(75, 25));
+        cancel.setPreferredSize(new Dimension(75, 25));
+
+        JPanel theButtons = new JPanel();
+        JPanel panelUnder = new JPanel();
+        panelUnder.setLayout(new FlowLayout());
+        JPanel comboBox = new JPanel();
+
+        JPanel panelNorth = new JPanel();
+        panelNorth.setLayout(new BoxLayout(panelNorth, BoxLayout.Y_AXIS));
+
+        ok.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cont = false;
+            }
+
+        });
+
+        cancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selection = null;
+                cont = false;
+            }
+
+        });
+
+        theBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selection = (String)
+                        ((JComboBox)e.getSource()).getSelectedItem();
+            }
+
+        });
+
+        comboBox.add(theBox);
+        theButtons.add(ok);
+        theButtons.add(cancel);
+
+
+        panelNorth.add(labelUpper);
+        panelNorth.add(labelLower);
+        panelUnder.add(panelNorth);
+        panelUnder.add(comboBox);
+        panelUnder.add(theButtons);
+
+        theFrame.setContentPane(panelUnder);
+        theFrame.setSize(220, 160);
+        theFrame.setLocationRelativeTo(null);
+        theFrame.setResizable(false);
+        theFrame.setVisible(true);
+
+        while(cont) {
+            try {
+                Thread.sleep(1);
+                if (!theFrame.isVisible()) {
+                    break;
+                }
+            } catch (InterruptedException e) {
+                continue;
+            }
+        }
+
+        String theSelection = selection;
+        selection = "mario";
+        theFrame.dispose();
+        return theSelection;
+    }
+
+
+    /**
+     * Shows a dialog box with the ComboBox that we've passed to it from some
+     * higher-up function call. The return String will have format ab, where
+     * a is the first selection and b is the second selection.
+     * @param theBox The ComboBox holding some set of options.
+     * @return A String representing the selection that we've made.
+     */
+    private static String showDualDialog(JComboBox theBox, JComboBox theSecondBox,
+            JLabel labelUpper, JLabel labelUpperMid, JLabel labelLowerMid,
+            JLabel labelLower) {
         cont = true;
         JFrame theFrame = new JFrame("Instrument Replacer");
         theFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
