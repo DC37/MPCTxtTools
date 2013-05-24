@@ -55,21 +55,16 @@ public class InstrumentReplacerMain {
             return;
         }
 
-        String change = InstrumentRepDialog.showInstrumentDialog();
+        String combo = InstrumentRepDialog.showInstrumentRepDialog();
 
-        if (change == null)
+        if (combo == null)
             return;
+
+        String change = combo.split(" ")[0];
 
         Character ch = instruments.get(change.toLowerCase());
-        if (ch == null) {
-            ErrorDialogs.illegalCharacter();
-            return;
-        }
 
-        String changeTo = InstrumentRepDialog.showReplacementDialog(change);
-
-        if (changeTo == null)
-            return;
+        String changeTo = combo.split(" ")[1];
 
         Character chT = instruments.get(changeTo.toLowerCase());
         if (chT == null) {
