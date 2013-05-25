@@ -113,17 +113,21 @@ public class InstrumentReplacer {
                 ArrayList<String> notes = n.notes();
                 for (int i = 0; i < notes.size(); i++) {
                     String str = notes.get(i);
-                    if (delete && str.charAt(0) == change)
-                        notes.set(i, "");
-                    else if (str.charAt(0) == change)
-                        notes.set(i, "" + changeTo + str.substring(1));
+                    if (str.length() > 0) {
+                        if (delete && str.charAt(0) == change)
+                            notes.set(i, "");
+                        else if (str.charAt(0) == change)
+                            notes.set(i, "" + changeTo + str.substring(1));
+                    }
                 }
                 st.append(n.toString());
+                out += st.toString();
             } catch (ParseException e) {
                 st.append(":");
                 error = true;
             }
         }
+        out += end;
         return out;
     }
 

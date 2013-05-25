@@ -61,16 +61,9 @@ public class InstrumentReplacerMain {
             return;
 
         String change = combo.split(" ")[0];
-
         Character ch = instruments.get(change.toLowerCase());
-
         String changeTo = combo.split(" ")[1];
-
         Character chT = instruments.get(changeTo.toLowerCase());
-        if (chT == null) {
-            ErrorDialogs.illegalCharacter();
-            return;
-        }
 
         try {
             replace.writeOldFile();
@@ -80,7 +73,7 @@ public class InstrumentReplacerMain {
             e.printStackTrace();
             return;
         }
-        String newFile = replace.change(ch, chT);
+        String newFile = replace.changeNew(ch, chT);
 
         try {
             PrintStream writer = new PrintStream(fileName);
