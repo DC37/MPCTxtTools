@@ -104,6 +104,11 @@ public class InstrumentReplacerMain {
 
     /**
      * This populates the hashtable we're using to get characters.
+     * Note: Discovered in 1.07: For some reason the programmer of Mario
+     * Paint Composer decided to switch "p" and "q" so that the order
+     * of the instruments isn't actually piranha and then coin, but
+     * actually coin and then piranha in terms of alphabet. This doesn't
+     * matter too much here, but it's useful as a future note.
      * @since 1.00b
      * @since 2011.0802
      */
@@ -111,7 +116,7 @@ public class InstrumentReplacerMain {
         String [] res = ("mario mushroom yoshi " +
                 "star flower gameboy dog cat " +
                 "pig swan face plane boat car " +
-                "heart piranha coin shyguy boo delete").split("\\s");
+                "heart coin piranha shyguy boo delete").split("\\s");
         for(char ch = 'a'; ch < 'u'; ch++)
             instruments.put(res[ch-97], new Character(ch));
     }
