@@ -13,7 +13,9 @@ import utilities.TextUtil;
  */
 public class NoteLine {
 
-    /** THe number of notes in an MPC song. */
+    /** THe number of notes in an MPC song line. There are actually 6 even though
+     * MPC itself can only play 5 at a time.
+     */
     private static final int NOTESIZE = 6;
 
     /** List of notes in this line. */

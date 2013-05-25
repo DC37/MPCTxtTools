@@ -104,11 +104,27 @@ public class InstrumentReplacer {
      */
     public void writeOldFile() throws Exception	{
         String fName = file.getName();
-        PrintStream writer = new PrintStream(
-                fName.substring(0,fName.indexOf(']'))
-                + "old]MarioPaint.txt");
+        fName = fName.substring(0,fName.indexOf(']'));
+        fName = checkOldExists(fName);
+        PrintStream writer = new PrintStream(fName);
         writer.print(text);
         writer.close();
+    }
+
+    /**
+     * Checks whether a file that we are trying to write to back up
+     * already exists.
+     * @param name The filename that we are trying to check.
+     * @return A valid filename that we can back up to.
+     */
+    private String checkOldExists(String name) {
+        File f = new File(name + "old1]MarioPaint.txt");
+        int counter = 2;
+        while (f.exists()) {
+            f = new File(name + "old" + counter + "]MarioPaint.txt");
+            counter++;
+        }
+        return f.getName();
     }
 
 }
