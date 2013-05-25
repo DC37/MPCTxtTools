@@ -80,12 +80,10 @@ public class NoteLine {
         for (String s1 : notes)
             if (s1.isEmpty())
                 empty++;
-        if (!(empty == NOTESIZE && vol == 'q')) {
-            if (!(vol == 'q')) {
-                for (String s1 : notes) {
-                    s.append(s1);
-                    s.append("+");
-                }
+        if (!(empty >= NOTESIZE && vol == 'q')) {
+            for (String s1 : notes) {
+                s.append(s1);
+                s.append("+");
             }
             s.append(vol);
         }
