@@ -34,6 +34,8 @@ public class FileSplitter {
     /**
      * Default class; initializes the file, oldText,
      * start, end, and text instances.
+     * @param fileName The name of the file that we're looking at.
+     * @throws Exception Bubbles up any exceptions thrown here.
      */
     public FileSplitter(File fileName) throws Exception {
         Scanner f = new Scanner(fileName);
@@ -60,7 +62,7 @@ public class FileSplitter {
     /**
      * Gets the number of times the user wishes to multiply the tempo
      * of an MPC song file by.
-     * @throws Exception
+     * @throws Exception Bubbles up any exceptions to the next level.
      */
     public void getMultiplier() throws Exception {
         Object st = null;

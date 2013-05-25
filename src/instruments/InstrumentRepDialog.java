@@ -35,7 +35,7 @@ public class InstrumentRepDialog {
     private static String selection = null;
 
     /** The second selection that we'll be making in this dialog box. */
-    private static String selection2 = null;
+    private static String replacement = null;
 
     /**
      * The different options that one can choose for the instrument
@@ -64,7 +64,7 @@ public class InstrumentRepDialog {
     static String showInstrumentRepDialog() {
         cont = true;
         cancelPressed = false;
-        selection = selection2 = "mario";
+        selection = replacement = "mario";
         JComboBox theBox = new JComboBox(res);
         theBox.addActionListener(new ActionListener() {
 
@@ -85,7 +85,7 @@ public class InstrumentRepDialog {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                selection2 = (String)
+                replacement = (String)
                         ((JComboBox)e.getSource()).getSelectedItem();
             }
 
@@ -195,7 +195,7 @@ public class InstrumentRepDialog {
         if (cancelPressed)
             return null;
 
-        return selection + " " + selection2;
+        return selection + " " + replacement;
     }
 
 }
