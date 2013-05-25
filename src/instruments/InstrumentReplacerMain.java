@@ -1,5 +1,7 @@
 package instruments;
 import javax.swing.JOptionPane;
+
+import errorChecking.FormatException;
 import errorChecking.ErrorDialogs;
 
 import java.io.File;
@@ -51,6 +53,10 @@ public class InstrumentReplacerMain {
             return;
         } catch(NoSuchElementException e) {
             ErrorDialogs.noText();
+            e.printStackTrace();
+            return;
+        } catch(FormatException e) {
+            ErrorDialogs.formatIssue();
             e.printStackTrace();
             return;
         }

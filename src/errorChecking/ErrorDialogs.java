@@ -108,14 +108,20 @@ public class ErrorDialogs {
     }
 
     /**
+     * Tells us that the text format of a file is erroneous and cannot be
+     * messed with.
+     */
+    public static void formatIssue() {
+        eDialog("There is some sort of text format issue in this file!");
+    }
+
+    /**
      * A catch-all error dialog - this is meant to help users
      * identify unanticipated errors so that later versions can
      * catch them.
      */
     public static void unanticipatedError() {
         eDialog("An unanticipated error occurred.\n" +
-                "You may want to talk to Rehd about this one.");
+                "You may want to talk to RehdBlob about this one.");
     }
-
-
 }

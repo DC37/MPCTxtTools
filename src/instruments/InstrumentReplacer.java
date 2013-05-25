@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
-import utilities.TextUtil;
-
+import errorChecking.FormatException;
 import static utilities.TextUtil.*;
 
 
@@ -38,6 +35,7 @@ public class InstrumentReplacer {
     private File file;
 
     /** This means that there was some error in parsing a note line. */
+    @SuppressWarnings("unused")
     private boolean error;
 
     /**
@@ -47,57 +45,23 @@ public class InstrumentReplacer {
      * @param read The raw MPC text file data given to this class
      * by another method.
      * @param fileName The name of the file that was opened.
+     * @throws FormatException If there is some issue with the parsing.
      */
-    public void setParams(String read, File fileName) {
-        text   = clean(read);
-        start  = getStart(read);
-        end    = getEnd(read);
-        pieces = chop(slice(text));
-        file   = fileName;
-    }
-
-    /**
-     * @param change The char that the method is to find and replace.
-     * @param changeTo The char that the method is to replace <b>change</b>
-     * with.
-     * @return The full MPC raw song data that is to be written
-     * into the file, with the correct instruments replaced.
-     */
-    public String change(char change, char changeTo) {
-
-        String out = start;
-        boolean delete = (changeTo == 't');
-        for (String s : pieces) {
-            if (s.indexOf(change) != -1) {
-                int i = 0;
-                ArrayList<String> beatPart = separate(s);
-                for(String t : beatPart) {
-                    i++;
-                    if (i == 7)	{
-                        i = 0;
-                        out+=t;
-                        break;
-                    }
-                    else if (t.charAt(0) == change)	{
-                        if (delete)
-                            out += "+";
-                        else
-                            out += changeTo + t.substring(1);
-                    } else {
-                        out+= t;
-                    }
-                }
-            } else 	{
-                out+=s;
-            }
+    public void setParams(String read, File fileName) throws FormatException {
+        try {
+            text   = clean(read);
+            start  = getStart(read);
+            end    = getEnd(read);
+            pieces = chop(slice(text));
+            file   = fileName;
+        } catch (IndexOutOfBoundsException e) {
+            throw new FormatException();
         }
-        out += end;
-        out = clean(out);
-        return out;
     }
 
     /**
-     * Uses a newer schema to replace all of one instrument with another.
+     * Uses a newer schema to replace all of one instrument with another. This
+     * method takes advantage of my newish knowledge in regex parsing.
      * @param change The character to change.
      * @param changeTo The character to change to.
      * @return The full MPC raw song data that is to be written

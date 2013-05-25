@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
  */
-import errorChecking.Cancel;
+import errorChecking.CancelException;
 import errorChecking.ErrorDialogs;
 import fileSplitter.FileSplitterMain;
 
@@ -88,7 +88,7 @@ public class MPCTxtToolsMain {
                     InstrumentReplacerMain.start(fileName());
                 } catch(NullPointerException e)	{
                     /* Do nothing! */
-                } catch(Cancel e) {
+                } catch(CancelException e) {
                     /* Do nothing! */
                 } catch(IOException e) {
                     /* Do nothing! */
@@ -99,7 +99,7 @@ public class MPCTxtToolsMain {
                     FileSplitterMain.start(fileName());
                 } catch(NullPointerException e) {
                     /* Do nothing! */
-                } catch(Cancel e) {
+                } catch(CancelException e) {
                     /* Do nothing! */
                 } catch(IOException e) {
                     /* Do nothing! */
@@ -176,10 +176,10 @@ public class MPCTxtToolsMain {
     /**
      * 
      * @return Some file that the user chooses.
-     * @throws Cancel
+     * @throws CancelException
      * @throws IOException
      */
-    public static File fileName() throws Cancel, IOException {
+    public static File fileName() throws CancelException, IOException {
         JFileChooser fd = new JFileChooser(".");
         FileFilter filter = new FileNameExtensionFilter(
                 "Text file (*.txt)", "txt");
@@ -189,7 +189,7 @@ public class MPCTxtToolsMain {
             return fd.getSelectedFile();
         }
         else if (returnVal == JFileChooser.CANCEL_OPTION)
-            throw new Cancel();
+            throw new CancelException();
         else {
             System.out.print("Error opening file!");
             throw new IOException();

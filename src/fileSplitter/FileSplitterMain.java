@@ -38,7 +38,7 @@ public class FileSplitterMain {
 				} catch (NoEntryException e) {
 					e.printStackTrace();
 					return;
-				} catch (Cancel c) {
+				} catch (CancelException c) {
 					return;
 				} catch (Exception e) {
 					ErrorDialogs.unanticipatedError();
