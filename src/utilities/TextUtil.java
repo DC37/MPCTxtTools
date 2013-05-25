@@ -22,7 +22,7 @@ public class TextUtil {
      * This is the regex pattern that denotes a note in an MPC text file. It
      * should also be able to catch "glitch" notes of the form a17
      */
-    private static final String note = "((([a-z][a-z][#;]?)?)|(([a-z][0-9][0-9][#;]?)?))";
+    private static final String note = "((([a-z][a-z][#;]?)?)|(([a-z][0-9][0-9][#;]?)?))?";
 
     /** This is the regex pattern that denotes a kind of a concat operator. */
     private static final String plus = "\\+";
@@ -53,7 +53,7 @@ public class TextUtil {
      * or :
      */
     private static final String noteLine = "(" + noteCat + noteCat
-            + noteCat + noteCat + noteCat + plus + "[a-z])?:";
+            + noteCat + noteCat + noteCat + noteCat + "[a-z])?:";
 
     /**
      * This is the regex pattern that denotes a line of notes.
@@ -87,7 +87,7 @@ public class TextUtil {
      * @since 2013.0205
      */
     public static String clean(String t) {
-        return t.replaceAll("\\+\\+\\+\\+\\+\\+q:", ":");
+        return t.replaceAll("[*:]\\+\\+\\+\\+\\+\\+q:", "::");
     }
 
 

@@ -195,10 +195,7 @@ public class InstrumentRepDialog {
         if (cancelPressed)
             return null;
 
-        String theSelection = selection;
-        theSelection += " " + selection2;
-
-        return theSelection;
+        return selection + " " + selection2;
     }
 
 }
