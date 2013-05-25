@@ -86,7 +86,7 @@ public class FileSplitter {
             splitLine = totalLines(text);
             break;
         default:
-            throw new Cancel();
+            throw new CancelException();
         }
     }
 

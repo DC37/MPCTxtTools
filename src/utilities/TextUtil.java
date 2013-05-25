@@ -75,6 +75,7 @@ public class TextUtil {
      * This is the pattern that denotes a line of notes that will have
      * at least some form of volume.
      */
+    @SuppressWarnings("unused")
     private static final Pattern lineForce = Pattern.compile(noteLineForce);
 
     /**
