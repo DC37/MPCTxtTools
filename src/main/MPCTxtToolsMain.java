@@ -34,8 +34,6 @@ public class MPCTxtToolsMain {
             "Version: 1.07\n\n" +
             "Meant to help replace instruments, split files and increase tempo,\n" +
             "or delete instruments with ease.\n" +
-            "This file MUST be in your prefs folder for the program\n" +
-            "to work!\n\n" +
             "More functionalities will be added... eventually.\n\n" +
             "Disclaimer: While every effort is made to back up files,\n" +
             "(The program creates \"old\" files before re-writing\n" +
@@ -50,8 +48,8 @@ public class MPCTxtToolsMain {
 
     private static final String instRepHelp = "General steps:\n" +
             "1. Enter filename.\n" +
-            "2. Enter name of instrument that you wish to replace.\n" +
-            "3. Enter name of instrument that you wish to replace that\n" +
+            "2. Select the instrument that you wish to replace.\n" +
+            "3. Select the instrument that you wish to replace that\n" +
             "instrument with. \"Delete\" is also an option.\n" +
             "4. The program does the rest...";
 
@@ -75,12 +73,11 @@ public class MPCTxtToolsMain {
                     "File splitter", "Prefs folder backup",
                     "Help/Info", "Exit"};
             int n = JOptionPane.showOptionDialog(null,
-                    "Put this program into your prefs folder, and " +
-                            "select the function you want to use:\n\n\n",
-                            "Mario Paint Composer Text Tools 1.07",
-                            JOptionPane.YES_NO_CANCEL_OPTION,
-                            JOptionPane.PLAIN_MESSAGE,
-                            null, options, options[3]);
+                    "Select the function you want to use:\n\n\n",
+                    "Mario Paint Composer Text Tools 1.07",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null, options, options[3]);
 
             switch(n) {
             case 0:
@@ -167,8 +164,7 @@ public class MPCTxtToolsMain {
     }
 
     @SuppressWarnings("unused")
-    private static void notDone()
-    {
+    private static void notDone() {
         JOptionPane.showMessageDialog(null, "Feature not implemented" +
                 " yet!", "Error", JOptionPane.WARNING_MESSAGE);
     }
