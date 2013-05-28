@@ -22,7 +22,7 @@ public class TextUtil {
      * This is the regex pattern that denotes a note in an MPC text file. It
      * should also be able to catch "glitch" notes of the form a17
      */
-    private static final String note = "((([a-z][a-z][#;]?)?)|(([a-z][0-9][0-9][#;]?)?))?";
+    private static final String note = "(([a-z][a-z0-9][0-9]?[#;]?)?)";
 
     /** This is the regex pattern that denotes a kind of a concat operator. */
     private static final String plus = "\\+";
