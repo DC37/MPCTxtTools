@@ -17,7 +17,6 @@ import java.util.Scanner;
  * more functionality to this later, though this is already
  * extremely useful.
  * @author RehdBlob
- * @version 1.06
  * @since 1.00
  * @since 2011.0802
  */

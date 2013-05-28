@@ -23,7 +23,7 @@ import fileSplitter.FileSplitterMain;
  * file editing features into a more intuitive,
  * more user-friendly application... hopefully.
  * @author RehdBlob
- * @version 1.06
+ * @version 1.07a
  * @since 1.00a
  * @since 2011.0802
  */
@@ -31,7 +31,7 @@ public class MPCTxtToolsMain {
 
     private static final String genHelp = "Mario Paint Composer Text Tools\n" +
             "Programmed by: RehdBlob (c)2011-2013\n" +
-            "Version: 1.07\n\n" +
+            "Version: 1.07a\n\n" +
             "Meant to help replace instruments, split files and increase tempo,\n" +
             "or delete instruments with ease.\n" +
             "More functionalities will be added... eventually.\n\n" +
@@ -74,7 +74,7 @@ public class MPCTxtToolsMain {
                     "Help/Info", "Exit"};
             int n = JOptionPane.showOptionDialog(null,
                     "Select the function you want to use:\n\n\n",
-                    "Mario Paint Composer Text Tools 1.07",
+                    "Mario Paint Composer Text Tools 1.07a",
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.PLAIN_MESSAGE,
                     null, options, options[3]);
