@@ -44,6 +44,7 @@ public class FileSplitter {
         start     = getStart(oldText);
         end       = getEnd(oldText);
         text      = chop(slice(clean(oldText)));
+        f.close();
     }
 
     /**
