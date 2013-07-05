@@ -138,7 +138,7 @@ public class MPCTxtToolsMain {
         while (repeat == true)
         {
             Object [] options = {"Instrument Replacer", "File Splitter",
-            "Back"};
+                    "Volume Changer", "Back"};
             int n = JOptionPane.showOptionDialog(null, genHelp, "General Info",
                     JOptionPane.INFORMATION_MESSAGE, JOptionPane.YES_NO_CANCEL_OPTION,
                     null, options, options[0]);
@@ -152,12 +152,14 @@ public class MPCTxtToolsMain {
                 JOptionPane.showMessageDialog(null, fileSplitHelp,
                         "File Splitter Help", JOptionPane.INFORMATION_MESSAGE);
                 break;
-                /*
-				case 2:
-					JOptionPane.showMessageDialog(null, new JScrollPane(new JLabel(changeLog)),
-							"Changelog", JOptionPane.INFORMATION_MESSAGE);
-					break;
-                 */
+            case 2:
+                JOptionPane.showMessageDialog(null, volumeChangeHelp,
+                        "Volume Changer Help", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 3:
+                //JOptionPane.showMessageDialog(null, new JScrollPane(new JLabel(changeLog)),
+                //        "Changelog", JOptionPane.INFORMATION_MESSAGE);
+                break;
             default:
                 repeat = false;
                 break;
