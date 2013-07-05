@@ -23,7 +23,11 @@ import fileSplitter.FileSplitterMain;
  * file editing features into a more intuitive,
  * more user-friendly application... hopefully.
  * @author RehdBlob
+<<<<<<< HEAD
  * @version 1.08
+=======
+ * @version 1.07a
+>>>>>>> 40bd0c234361bd8443e196f6de329f0676f8d2b9
  * @since 1.00a
  * @since 2011.0802
  */
@@ -31,7 +35,11 @@ public class MPCTxtToolsMain {
 
     private static final String genHelp = "Mario Paint Composer Text Tools\n" +
             "Programmed by: RehdBlob (c)2011-2013\n" +
+<<<<<<< HEAD
             "Version: 1.08\n\n" +
+=======
+            "Version: 1.07a\n\n" +
+>>>>>>> 40bd0c234361bd8443e196f6de329f0676f8d2b9
             "Meant to help replace instruments, split files and increase tempo,\n" +
             "or delete instruments with ease.\n" +
             "More functionalities will be added... eventually.\n\n" +
@@ -47,14 +55,22 @@ public class MPCTxtToolsMain {
             "More help options are below, if needed.\n";
 
     private static final String instRepHelp = "General steps:\n" +
+<<<<<<< HEAD
             "1. Select file.\n" +
+=======
+            "1. Enter filename.\n" +
+>>>>>>> 40bd0c234361bd8443e196f6de329f0676f8d2b9
             "2. Select the instrument that you wish to replace.\n" +
             "3. Select the instrument that you wish to replace that\n" +
             "instrument with. \"Delete\" is also an option.\n" +
             "4. The program does the rest...";
 
     private static final String fileSplitHelp = "General steps:\n" +
+<<<<<<< HEAD
             "1. Select file.\n" +
+=======
+            "1. Enter filename.\n" +
+>>>>>>> 40bd0c234361bd8443e196f6de329f0676f8d2b9
             "2. Enter the number of times that you wish to multiply\n" +
             "the current tempo by. An added functionality for handling\n" +
             "tempo gaps will probably be programmed in in the near future,\n" +
@@ -63,11 +79,14 @@ public class MPCTxtToolsMain {
             "specified number of times, creating intermediate files and\n" +
             "updating the MarioPaintSongList.txt file if necessary.";
 
+<<<<<<< HEAD
     private static final String volumeChangeHelp = "General steps:\n" +
             "1. Select file.\n" +
             "2. Specify which lines you want the volume changed for.\n" +
             "3. The program will do the rest...";
 
+=======
+>>>>>>> 40bd0c234361bd8443e196f6de329f0676f8d2b9
     /**
      * Outputs the main menu of the program.
      */
@@ -79,7 +98,11 @@ public class MPCTxtToolsMain {
                     "Help/Info", "Exit"};
             int n = JOptionPane.showOptionDialog(null,
                     "Select the function you want to use:\n\n\n",
+<<<<<<< HEAD
                     "Mario Paint Composer Text Tools 1.08",
+=======
+                    "Mario Paint Composer Text Tools 1.07a",
+>>>>>>> 40bd0c234361bd8443e196f6de329f0676f8d2b9
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.PLAIN_MESSAGE,
                     null, options, options[3]);
